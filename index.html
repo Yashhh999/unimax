@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNIMAX STUDIOS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Grain Overlay -->
+    <div class="grain"></div>
+    
+    <!-- Page Indicator -->
+    <div class="page-indicator">
+        <div class="indicator active" data-page="1"></div>
+        <div class="indicator" data-page="2"></div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        
+        <!-- Page 1: Projects -->
+        <section class="page page-projects active" id="page1">
+            <!-- Floating Studio Name -->
+            <div class="floating-name">
+                <img src="image.png" alt="UNIMAX" class="floating-logo">
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="projects-grid">
+                
+                <!-- Project Card 1 -->
+                <article class="project-card" data-category="MOTION">
+                    <div class="card-glow"></div>
+                    <div class="card-inner">
+                        <div class="video-container">
+                            <video src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-134-large.mp4" muted loop playsinline></video>
+                            <div class="video-overlay"></div>
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">MOTION DESIGN</span>
+                            <h3 class="card-title">Ink Dreams</h3>
+                            <p class="card-desc">Fluid motion graphics with organic transitions</p>
+                            <div class="card-meta">
+                                <span class="meta-item">4K</span>
+                                <span class="meta-item">60fps</span>
+                                <span class="meta-item">2024</span>
+                            </div>
+                        </div>
+                        <div class="card-number">01</div>
+                    </div>
+                </article>
+
+                <!-- Project Card 2 -->
+                <article class="project-card" data-category="VFX">
+                    <div class="card-glow"></div>
+                    <div class="card-inner">
+                        <div class="video-container">
+                            <video src="https://assets.mixkit.co/videos/preview/mixkit-purple-and-golden-lights-1234-large.mp4" muted loop playsinline></video>
+                            <div class="video-overlay"></div>
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">VISUAL EFFECTS</span>
+                            <h3 class="card-title">Neon Pulse</h3>
+                            <p class="card-desc">High-energy particle systems and light trails</p>
+                            <div class="card-meta">
+                                <span class="meta-item">4K</span>
+                                <span class="meta-item">120fps</span>
+                                <span class="meta-item">2024</span>
+                            </div>
+                        </div>
+                        <div class="card-number">02</div>
+                    </div>
+                </article>
+
+                <!-- Project Card 3 -->
+                <article class="project-card" data-category="EDIT">
+                    <div class="card-glow"></div>
+                    <div class="card-inner">
+                        <div class="video-container">
+                            <video src="https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4" muted loop playsinline></video>
+                            <div class="video-overlay"></div>
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">CINEMATIC EDIT</span>
+                            <h3 class="card-title">Golden Hour</h3>
+                            <p class="card-desc">Atmospheric color grading and seamless cuts</p>
+                            <div class="card-meta">
+                                <span class="meta-item">4K</span>
+                                <span class="meta-item">24fps</span>
+                                <span class="meta-item">2024</span>
+                            </div>
+                        </div>
+                        <div class="card-number">03</div>
+                    </div>
+                </article>
+
+                <!-- Project Card 4 -->
+                <article class="project-card" data-category="3D">
+                    <div class="card-glow"></div>
+                    <div class="card-inner">
+                        <div class="video-container">
+                            <video src="https://assets.mixkit.co/videos/preview/mixkit-abstract-flowing-colorful-fluid-4007-large.mp4" muted loop playsinline></video>
+                            <div class="video-overlay"></div>
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">3D ANIMATION</span>
+                            <h3 class="card-title">Fluid Reality</h3>
+                            <p class="card-desc">Abstract 3D fluid simulations and morphing</p>
+                            <div class="card-meta">
+                                <span class="meta-item">4K</span>
+                                <span class="meta-item">60fps</span>
+                                <span class="meta-item">2024</span>
+                            </div>
+                        </div>
+                        <div class="card-number">04</div>
+                    </div>
+                </article>
+
+                <!-- Project Card 5 -->
+                <article class="project-card" data-category="MUSIC">
+                    <div class="card-glow"></div>
+                    <div class="card-inner">
+                        <div class="video-container">
+                            <video src="https://assets.mixkit.co/videos/preview/mixkit-night-sky-with-stars-at-a-calm-lake-21464-large.mp4" muted loop playsinline></video>
+                            <div class="video-overlay"></div>
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">MUSIC VIDEO</span>
+                            <h3 class="card-title">Midnight Lake</h3>
+                            <p class="card-desc">Dreamy visuals synced to ambient soundscapes</p>
+                            <div class="card-meta">
+                                <span class="meta-item">4K</span>
+                                <span class="meta-item">30fps</span>
+                                <span class="meta-item">2024</span>
+                            </div>
+                        </div>
+                        <div class="card-number">05</div>
+                    </div>
+                </article>
+
+                <!-- Project Card 6 -->
+                <article class="project-card" data-category="PROMO">
+                    <div class="card-glow"></div>
+                    <div class="card-inner">
+                        <div class="video-container">
+                            <video src="https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4" muted loop playsinline></video>
+                            <div class="video-overlay"></div>
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">BRAND PROMO</span>
+                            <h3 class="card-title">Ocean Flow</h3>
+                            <p class="card-desc">Elegant product showcase with water elements</p>
+                            <div class="card-meta">
+                                <span class="meta-item">4K</span>
+                                <span class="meta-item">60fps</span>
+                                <span class="meta-item">2024</span>
+                            </div>
+                        </div>
+                        <div class="card-number">06</div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Marquee Text -->
+            <div class="marquee-container">
+                <div class="marquee-track">
+                    <span class="marquee-text">MOTION DESIGN</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">VIDEO EDITING</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">VISUAL EFFECTS</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">COLOR GRADING</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">3D ANIMATION</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">MOTION DESIGN</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">VIDEO EDITING</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">VISUAL EFFECTS</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">COLOR GRADING</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">3D ANIMATION</span>
+                    <span class="marquee-separator">✦</span>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <span>SCROLL</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- Page 2: About & Contact -->
+        <section class="page page-about" id="page2">
+            <div class="about-container">
+                
+                <!-- About Section -->
+                <div class="about-section">
+                    <div class="about-left">
+                        <div class="section-label">ABOUT</div>
+                        <h2 class="about-title">
+                            <span class="title-line">We craft</span>
+                            <span class="title-line highlight">visual stories</span>
+                            <span class="title-line">that move.</span>
+                        </h2>
+                        <div class="about-content">
+                            <p>UNIMAX STUDIOS is a creative powerhouse specializing in high-end video editing, motion design, and visual effects. We transform raw footage into cinematic masterpieces that captivate audiences and elevate brands.</p>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number" data-count="150">0</span>
+                                <span class="stat-label">Projects Delivered</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" data-count="50">0</span>
+                                <span class="stat-label">Happy Clients</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" data-count="5">0</span>
+                                <span class="stat-label">Years Experience</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-right">
+                        <div class="visual-showcase">
+                            <div class="showcase-glow"></div>
+                            <div class="floating-shapes">
+                                <div class="shape shape-1"></div>
+                                <div class="shape shape-2"></div>
+                                <div class="shape shape-3"></div>
+                            </div>
+                            <div class="services-card">
+                                <div class="services-card-header">
+                                    <span class="services-label">SERVICES</span>
+                                    <span class="services-count">06</span>
+                                </div>
+                                <div class="services-list">
+                                    <div class="service-item">
+                                        <span class="service-icon">◆</span>
+                                        <span>Video Editing</span>
+                                        <span class="service-arrow">→</span>
+                                    </div>
+                                    <div class="service-item">
+                                        <span class="service-icon">◆</span>
+                                        <span>Motion Graphics</span>
+                                        <span class="service-arrow">→</span>
+                                    </div>
+                                    <div class="service-item">
+                                        <span class="service-icon">◆</span>
+                                        <span>Visual Effects</span>
+                                        <span class="service-arrow">→</span>
+                                    </div>
+                                    <div class="service-item">
+                                        <span class="service-icon">◆</span>
+                                        <span>Color Grading</span>
+                                        <span class="service-arrow">→</span>
+                                    </div>
+                                    <div class="service-item">
+                                        <span class="service-icon">◆</span>
+                                        <span>3D Animation</span>
+                                        <span class="service-arrow">→</span>
+                                    </div>
+                                    <div class="service-item">
+                                        <span class="service-icon">◆</span>
+                                        <span>Sound Design</span>
+                                        <span class="service-arrow">→</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Section (Footer) -->
+                <footer class="contact-footer">
+                    <div class="footer-glow"></div>
+                    <div class="footer-content">
+                        <div class="contact-cta">
+                            <span class="cta-label">READY TO CREATE?</span>
+                            <h3 class="cta-title">Let's make something <span class="gradient-text">legendary</span></h3>
+                        </div>
+                        
+                        <div class="contact-grid">
+                            <div class="contact-item">
+                                <span class="contact-label">EMAIL</span>
+                                <a href="mailto:hello@unimaxstudios.com" class="contact-link magnetic">hello@unimaxstudios.com</a>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-label">INSTAGRAM</span>
+                                <a href="#" class="contact-link magnetic">@unimaxstudios</a>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-label">DISCORD</span>
+                                <a href="#" class="contact-link magnetic">Join Server</a>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-label">YOUTUBE</span>
+                                <a href="#" class="contact-link magnetic">Subscribe</a>
+                            </div>
+                        </div>
+
+                        <div class="footer-bottom">
+                            <span class="copyright">© 2024 UNIMAX STUDIOS. All rights reserved.</span>
+                            <div class="footer-links">
+                                <a href="#" class="footer-link">Terms</a>
+                                <a href="#" class="footer-link">Privacy</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Back to Top -->
+                    <button class="back-to-top" id="backToTop">
+                        <span>↑</span>
+                        <span>TOP</span>
+                    </button>
+                </footer>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
