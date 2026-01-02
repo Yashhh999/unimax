@@ -1,0 +1,11 @@
+{
+  "name": "unimax-studios",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@upstash/redis": "^1.28.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

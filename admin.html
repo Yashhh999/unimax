@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNIMAX STUDIOS - Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&family=Urbanist:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Login Overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-container">
+            <div class="login-card">
+                <h1 class="login-logo">UNIMAX</h1>
+                <p class="login-subtitle">ADMIN ACCESS</p>
+                
+                <form class="login-form" id="loginForm">
+                    <div class="login-input-group">
+                        <input type="password" id="adminPassword" placeholder="Enter admin password" autocomplete="current-password" required>
+                    </div>
+                    
+                    <div class="login-error" id="loginError">
+                        ⚠️ Incorrect password. <span id="attemptsLeft">3</span> attempts remaining.
+                    </div>
+                    
+                    <div class="login-lockout" id="loginLockout">
+                        🔒 Too many failed attempts. Try again in <span class="lockout-timer" id="lockoutTimer">0:00</span>
+                    </div>
+                    
+                    <button type="submit" class="login-btn" id="loginBtn">Access Panel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1 class="logo">UNIMAX</h1>
+            <span class="logo-sub">ADMIN</span>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-section="dashboard">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-section="seasons">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                </svg>
+                <span>Seasons</span>
+            </a>
+            <a href="#" class="nav-item" data-section="themes">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 2a10 10 0 0 0 0 20"></path>
+                </svg>
+                <span>Themes</span>
+            </a>
+            <a href="#" class="nav-item" data-section="backgrounds">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <span>Backgrounds</span>
+            </a>
+            <a href="#" class="nav-item" data-section="projects">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>Projects</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="index.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Back to Site</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Dashboard Section -->
+        <section class="content-section active" id="dashboard">
+            <header class="section-header">
+                <h2>Dashboard</h2>
+                <p>Overview of your site settings and quick actions</p>
+            </header>
+            
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon season-icon">
+                        <span id="currentSeasonIcon">❄️</span>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Current Season</span>
+                        <span class="stat-value" id="currentSeasonLabel">Winter</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon projects-icon">📁</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Projects</span>
+                        <span class="stat-value" id="totalProjects">0</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon visible-icon">👁️</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Visible Projects</span>
+                        <span class="stat-value" id="visibleProjects">0</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon hidden-icon">👻</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Hidden (Ghost)</span>
+                        <span class="stat-value" id="hiddenProjects">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="actions-grid">
+                    <button class="action-btn" onclick="switchSection('seasons')">
+                        <span class="action-icon">🌤️</span>
+                        <span>Change Season</span>
+                    </button>
+                    <button class="action-btn" onclick="switchSection('projects')">
+                        <span class="action-icon">➕</span>
+                        <span>Add Project</span>
+                    </button>
+                    <button class="action-btn" onclick="switchSection('themes')">
+                        <span class="action-icon">🎨</span>
+                        <span>Edit Theme</span>
+                    </button>
+                    <button class="action-btn" onclick="previewSite()">
+                        <span class="action-icon">👀</span>
+                        <span>Preview Site</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seasons Section -->
+        <section class="content-section" id="seasons">
+            <header class="section-header">
+                <h2>Season Management</h2>
+                <p>Control seasonal effects and automatic detection</p>
+            </header>
+            
+            <div class="settings-card">
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Auto-detect Season</h4>
+                        <p>Automatically change season based on current date</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="autoSeasonToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Effect Intensity</h4>
+                        <p>Control the amount of particles and effects</p>
+                    </div>
+                    <div class="intensity-selector">
+                        <button class="intensity-btn" data-intensity="low">Low</button>
+                        <button class="intensity-btn active" data-intensity="medium">Medium</button>
+                        <button class="intensity-btn" data-intensity="high">High</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="subsection-title">Select Season</h3>
+            <div class="season-grid">
+                <div class="season-card" data-season="default">
+                    <div class="season-preview default-preview"></div>
+                    <div class="season-info">
+                        <span class="season-icon">🌙</span>
+                        <h4>Default</h4>
+                        <p>No effects, clean look</p>
+                    </div>
+                </div>
+                
+                <div class="season-card" data-season="winter">
+                    <div class="season-preview winter-preview">
+                        <div class="mini-snow">❄️</div>
+                        <div class="mini-snow">❄️</div>
+                        <div class="mini-snow">❄️</div>
+                    </div>
+                    <div class="season-info">
+                        <span class="season-icon">❄️</span>
+                        <h4>Winter</h4>
+                        <p>Snowfall effect</p>
+                    </div>
+                </div>
+                
+                <div class="season-card" data-season="summer">
+                    <div class="season-preview summer-preview">
+                        <div class="mini-sun"></div>
+                    </div>
+                    <div class="season-info">
+                        <span class="season-icon">☀️</span>
+                        <h4>Summer</h4>
+                        <p>Sun glare & lens flares</p>
+                    </div>
+                </div>
+                
+                <div class="season-card" data-season="rainy">
+                    <div class="season-preview rainy-preview">
+                        <div class="mini-rain"></div>
+                        <div class="mini-rain"></div>
+                        <div class="mini-rain"></div>
+                    </div>
+                    <div class="season-info">
+                        <span class="season-icon">🌧️</span>
+                        <h4>Rainy</h4>
+                        <p>Rain with lightning</p>
+                    </div>
+                </div>
+                
+                <div class="season-card" data-season="spring">
+                    <div class="season-preview spring-preview">
+                        <div class="mini-petal">🌸</div>
+                        <div class="mini-petal">🌸</div>
+                    </div>
+                    <div class="season-info">
+                        <span class="season-icon">🌸</span>
+                        <h4>Spring</h4>
+                        <p>Cherry blossoms</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Themes Section -->
+        <section class="content-section" id="themes">
+            <header class="section-header">
+                <h2>Theme Customization</h2>
+                <p>Create and manage color templates for each season</p>
+            </header>
+            
+            <div class="theme-selector">
+                <label>Select Season to Edit:</label>
+                <select id="themeSeasonSelect">
+                    <option value="default">Default</option>
+                    <option value="winter">Winter</option>
+                    <option value="summer">Summer</option>
+                    <option value="rainy">Rainy</option>
+                    <option value="spring">Spring</option>
+                </select>
+            </div>
+            
+            <div class="theme-editor">
+                <div class="color-grid">
+                    <div class="color-input-group">
+                        <label>Background Primary</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="bgPrimary" value="#0a0a0b">
+                            <input type="text" id="bgPrimaryText" value="#0a0a0b">
+                        </div>
+                    </div>
+                    
+                    <div class="color-input-group">
+                        <label>Background Secondary</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="bgSecondary" value="#111113">
+                            <input type="text" id="bgSecondaryText" value="#111113">
+                        </div>
+                    </div>
+                    
+                    <div class="color-input-group">
+                        <label>Card Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="bgCard" value="#161618">
+                            <input type="text" id="bgCardText" value="#161618">
+                        </div>
+                    </div>
+                    
+                    <div class="color-input-group">
+                        <label>Accent Primary</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="accentPrimary" value="#8b5cf6">
+                            <input type="text" id="accentPrimaryText" value="#8b5cf6">
+                        </div>
+                    </div>
+                    
+                    <div class="color-input-group">
+                        <label>Accent Secondary</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="accentSecondary" value="#06b6d4">
+                            <input type="text" id="accentSecondaryText" value="#06b6d4">
+                        </div>
+                    </div>
+                    
+                    <div class="color-input-group">
+                        <label>Text Secondary</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="textSecondary" value="#888888">
+                            <input type="text" id="textSecondaryText" value="#888888">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="theme-preview">
+                    <h4>Preview</h4>
+                    <div class="preview-card" id="themePreviewCard">
+                        <div class="preview-header"></div>
+                        <div class="preview-content">
+                            <div class="preview-title">Sample Project</div>
+                            <div class="preview-text">Preview description text</div>
+                            <div class="preview-accent"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="theme-actions">
+                    <button class="btn-secondary" id="resetTheme">Reset to Default</button>
+                    <button class="btn-primary" id="saveTheme">Save Theme</button>
+                </div>
+            </div>
+            
+            <!-- Font Customization -->
+            <div class="fonts-section">
+                <h3>Typography</h3>
+                <p class="section-desc">Choose fonts for your site</p>
+                
+                <div class="font-selectors">
+                    <div class="font-selector-group">
+                        <label>Primary Font (Body Text)</label>
+                        <select id="primaryFontSelect" class="font-select">
+                            <option value="Space Grotesk" data-url="Space+Grotesk:wght@300;400;500;600;700">Space Grotesk</option>
+                            <option value="Inter" data-url="Inter:wght@300;400;500;600;700;800">Inter</option>
+                            <option value="Outfit" data-url="Outfit:wght@300;400;500;600;700;800">Outfit</option>
+                            <option value="Poppins" data-url="Poppins:wght@300;400;500;600;700;800">Poppins</option>
+                            <option value="Montserrat" data-url="Montserrat:wght@300;400;500;600;700;800">Montserrat</option>
+                            <option value="Urbanist" data-url="Urbanist:wght@300;400;500;600;700;800">Urbanist</option>
+                            <option value="DM Sans" data-url="DM+Sans:wght@300;400;500;600;700">DM Sans</option>
+                            <option value="Manrope" data-url="Manrope:wght@300;400;500;600;700;800">Manrope</option>
+                            <option value="Plus Jakarta Sans" data-url="Plus+Jakarta+Sans:wght@300;400;500;600;700;800">Plus Jakarta Sans</option>
+                            <option value="Syne" data-url="Syne:wght@400;500;600;700;800">Syne</option>
+                        </select>
+                        <div class="font-preview" id="primaryFontPreview" style="font-family: 'Space Grotesk', sans-serif;">
+                            The quick brown fox jumps over the lazy dog
+                        </div>
+                    </div>
+                    
+                    <div class="font-selector-group">
+                        <label>Display Font (Headings)</label>
+                        <select id="displayFontSelect" class="font-select">
+                            <option value="Syne" data-url="Syne:wght@400;500;600;700;800">Syne</option>
+                            <option value="Space Grotesk" data-url="Space+Grotesk:wght@300;400;500;600;700">Space Grotesk</option>
+                            <option value="Inter" data-url="Inter:wght@300;400;500;600;700;800">Inter</option>
+                            <option value="Outfit" data-url="Outfit:wght@300;400;500;600;700;800">Outfit</option>
+                            <option value="Poppins" data-url="Poppins:wght@300;400;500;600;700;800">Poppins</option>
+                            <option value="Montserrat" data-url="Montserrat:wght@300;400;500;600;700;800">Montserrat</option>
+                            <option value="Urbanist" data-url="Urbanist:wght@300;400;500;600;700;800">Urbanist</option>
+                            <option value="DM Sans" data-url="DM+Sans:wght@300;400;500;600;700">DM Sans</option>
+                            <option value="Manrope" data-url="Manrope:wght@300;400;500;600;700;800">Manrope</option>
+                            <option value="Plus Jakarta Sans" data-url="Plus+Jakarta+Sans:wght@300;400;500;600;700;800">Plus Jakarta Sans</option>
+                        </select>
+                        <div class="font-preview" id="displayFontPreview" style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.5rem;">
+                            UNIMAX STUDIOS
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="font-actions">
+                    <button class="btn-secondary" id="resetFonts">Reset to Default</button>
+                    <button class="btn-primary" id="saveFonts">Save Fonts</button>
+                </div>
+            </div>
+            
+            <div class="presets-section">
+                <h3>Quick Presets</h3>
+                <div class="presets-grid">
+                    <button class="preset-btn" data-preset="cyberpunk">
+                        <span class="preset-colors">
+                            <span style="background: #ff00ff"></span>
+                            <span style="background: #00ffff"></span>
+                        </span>
+                        <span>Cyberpunk</span>
+                    </button>
+                    <button class="preset-btn" data-preset="sunset">
+                        <span class="preset-colors">
+                            <span style="background: #ff6b6b"></span>
+                            <span style="background: #feca57"></span>
+                        </span>
+                        <span>Sunset</span>
+                    </button>
+                    <button class="preset-btn" data-preset="ocean">
+                        <span class="preset-colors">
+                            <span style="background: #0077b6"></span>
+                            <span style="background: #00b4d8"></span>
+                        </span>
+                        <span>Ocean</span>
+                    </button>
+                    <button class="preset-btn" data-preset="forest">
+                        <span class="preset-colors">
+                            <span style="background: #2d6a4f"></span>
+                            <span style="background: #40916c"></span>
+                        </span>
+                        <span>Forest</span>
+                    </button>
+                    <button class="preset-btn" data-preset="midnight">
+                        <span class="preset-colors">
+                            <span style="background: #4a4e69"></span>
+                            <span style="background: #9a8c98"></span>
+                        </span>
+                        <span>Midnight</span>
+                    </button>
+                    <button class="preset-btn" data-preset="neon">
+                        <span class="preset-colors">
+                            <span style="background: #39ff14"></span>
+                            <span style="background: #ff073a"></span>
+                        </span>
+                        <span>Neon</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Background Images Section -->
+        <section class="content-section" id="backgrounds">
+            <header class="section-header">
+                <h2>Background Images</h2>
+                <p>Add custom background images for each category section</p>
+            </header>
+            
+            <div class="bg-grid">
+                <div class="bg-card">
+                    <label>Reels Section</label>
+                    <input type="url" id="bgReels" placeholder="Image URL (leave empty for none)">
+                    <div class="bg-preview" id="bgReelsPreview"></div>
+                </div>
+                <div class="bg-card">
+                    <label>Documentary Section</label>
+                    <input type="url" id="bgDocumentary" placeholder="Image URL (leave empty for none)">
+                    <div class="bg-preview" id="bgDocumentaryPreview"></div>
+                </div>
+                <div class="bg-card">
+                    <label>Graphics Design Section</label>
+                    <input type="url" id="bgGraphics" placeholder="Image URL (leave empty for none)">
+                    <div class="bg-preview" id="bgGraphicsPreview"></div>
+                </div>
+                <div class="bg-card">
+                    <label>Posters Section</label>
+                    <input type="url" id="bgPosters" placeholder="Image URL (leave empty for none)">
+                    <div class="bg-preview" id="bgPostersPreview"></div>
+                </div>
+            </div>
+            
+            <div class="bg-actions">
+                <button class="btn-secondary" id="clearBgImages">Clear All</button>
+                <button class="btn-primary" id="saveBgImages">Save Backgrounds</button>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="content-section" id="projects">
+            <header class="section-header">
+                <h2>Project Management</h2>
+                <p>Add, edit, and manage your portfolio projects</p>
+            </header>
+            
+            <div class="projects-toolbar">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" id="projectSearch" placeholder="Search projects...">
+                </div>
+                <div class="toolbar-actions">
+                    <select id="projectFilter">
+                        <option value="all">All Projects</option>
+                        <option value="visible">Visible Only</option>
+                        <option value="hidden">Hidden Only</option>
+                    </select>
+                    <button class="btn-primary" id="addProjectBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Add Project
+                    </button>
+                </div>
+            </div>
+            
+            <div class="projects-list" id="projectsList">
+                <!-- Projects will be rendered here -->
+                <div class="empty-state" id="emptyProjects">
+                    <span class="empty-icon">📁</span>
+                    <h4>No projects yet</h4>
+                    <p>Add your first project to get started</p>
+                    <button class="btn-primary" onclick="openProjectModal()">Add Project</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Project Modal -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New Project</h3>
+                <button class="modal-close" onclick="closeProjectModal()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="projectId">
+                
+                <div class="form-group">
+                    <label for="projectTitle">Project Title *</label>
+                    <input type="text" id="projectTitle" placeholder="Enter project title">
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectCategory">Category *</label>
+                    <select id="projectCategory">
+                        <option value="">Select category</option>
+                        <option value="REELS">Reels</option>
+                        <option value="DOCUMENTARY">Documentary</option>
+                        <option value="GRAPHICS">Graphics Design</option>
+                        <option value="POSTERS">Posters</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectDesc">Description</label>
+                    <textarea id="projectDesc" placeholder="Brief description of the project"></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="projectResolution">Resolution</label>
+                        <select id="projectResolution">
+                            <option value="4K">4K</option>
+                            <option value="1080p">1080p</option>
+                            <option value="720p">720p</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectFps">Frame Rate</label>
+                        <select id="projectFps">
+                            <option value="60fps">60fps</option>
+                            <option value="30fps">30fps</option>
+                            <option value="24fps">24fps</option>
+                            <option value="120fps">120fps</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectYear">Year</label>
+                        <input type="number" id="projectYear" value="2024" min="2000" max="2099">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectVideo">Video URL</label>
+                    <input type="text" id="projectVideo" placeholder="https://... (MP4 video URL)">
+                    <span class="form-hint">Direct link to MP4 video file</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectThumbnail">Thumbnail URL (optional)</label>
+                    <input type="text" id="projectThumbnail" placeholder="https://... (Image URL)">
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="projectHidden">
+                        <span class="checkmark"></span>
+                        <span>Hidden (Ghost mode) - Won't appear on site</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeProjectModal()">Cancel</button>
+                <button class="btn-primary" id="saveProjectBtn">Save Project</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="admin-api.js"></script>
+</body>
+</html>

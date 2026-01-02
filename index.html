@@ -1,19 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-season="default">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="UNIMAX STUDIOS - Premium video editing, motion design, and visual effects studio">
+    <meta name="theme-color" content="#0a0a0b">
     <title>UNIMAX STUDIOS</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="effects.css" as="style">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="effects.css">
+    <link id="dynamicFonts" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Critical inline styles for faster paint -->
+    <style>
+        body { background: #0a0a0b; overflow: hidden; }
+        body.loaded { overflow: auto; }
+        .site-content { opacity: 0; visibility: hidden; transition: opacity 0.5s ease; }
+        body.loaded .site-content { opacity: 1; visibility: visible; }
+        .loader { position: fixed; inset: 0; background: #0a0a0b; z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+        .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-content { display: flex; flex-direction: column; align-items: center; gap: 20px; position: relative; }
+        .loader-glow { position: absolute; width: 180px; height: 120px; background: radial-gradient(ellipse at center, rgba(255, 200, 100, 0.5) 0%, rgba(255, 180, 80, 0.3) 30%, rgba(255, 150, 50, 0.1) 50%, transparent 70%); filter: blur(25px); animation: loaderBulb 3s ease-in-out infinite; pointer-events: none; top: 50%; left: 50%; transform: translate(-50%, -60%); }
+        .loader-logo { width: 100px; height: auto; opacity: 0; animation: logoFadeIn 0.8s 0.2s ease forwards; position: relative; z-index: 2; }
+        .loader-bar { width: 180px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; opacity: 0; animation: logoFadeIn 0.5s 0.5s ease forwards; }
+        .loader-bar::after { content: ''; display: block; width: 40%; height: 100%; background: linear-gradient(90deg, rgba(255,200,100,0.8), rgba(255,180,80,0.8)); animation: load 1.2s ease-in-out infinite; }
+        @keyframes load { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
+        @keyframes logoFadeIn { to { opacity: 1; } }
+        @keyframes loaderBulb { 0%, 100% { opacity: 0.5; } 15% { opacity: 0.3; } 30% { opacity: 0.7; } 45% { opacity: 0.4; } 60% { opacity: 0.8; } 75% { opacity: 0.35; } 90% { opacity: 0.6; } }
+    </style>
 </head>
 <body>
     <!-- Loader -->
     <div class="loader" id="loader">
         <div class="loader-content">
+            <div class="loader-glow"></div>
+            <img src="image.png" alt="UNIMAX" class="loader-logo">
             <div class="loader-bar"></div>
         </div>
     </div>
+
+    <!-- Site Content Wrapper -->
+    <div class="site-content">
 
     <!-- Custom Cursor -->
     <div class="cursor"></div>
@@ -21,11 +55,25 @@
     
     <!-- Grain Overlay -->
     <div class="grain"></div>
-    
-    <!-- Page Indicator -->
-    <div class="page-indicator">
-        <div class="indicator active" data-page="1"></div>
-        <div class="indicator" data-page="2"></div>
+
+    <!-- Floating Island Navbar -->
+    <nav class="floating-island" id="floatingIsland">
+        <a href="#REELS" class="island-link active" data-category="REELS">Reels</a>
+        <a href="#DOCUMENTARY" class="island-link" data-category="DOCUMENTARY">Documentary</a>
+        <a href="#GRAPHICS" class="island-link" data-category="GRAPHICS">Graphics design</a>
+        <a href="#POSTERS" class="island-link" data-category="POSTERS">Posters</a>
+    </nav>
+
+    <!-- Unified Side Indicator -->
+    <div class="side-indicator" id="sideIndicator">
+        <div class="indicator-dot main-dot active" data-page="1" title="Projects"></div>
+        <div class="indicator-divider"></div>
+        <div class="indicator-dot cat-dot" data-category="REELS" title="Reels"></div>
+        <div class="indicator-dot cat-dot" data-category="DOCUMENTARY" title="Documentary"></div>
+        <div class="indicator-dot cat-dot" data-category="GRAPHICS" title="Graphics"></div>
+        <div class="indicator-dot cat-dot" data-category="POSTERS" title="Posters"></div>
+        <div class="indicator-divider"></div>
+        <div class="indicator-dot main-dot" data-page="2" title="About"></div>
     </div>
 
     <!-- Main Container -->
@@ -33,200 +81,109 @@
         
         <!-- Page 1: Projects -->
         <section class="page page-projects active" id="page1">
-            <!-- Floating Studio Name -->
+            <!-- Floating Studio Name with Bulb Effect -->
             <div class="floating-name">
+                <div class="bulb-glow"></div>
                 <img src="image.png" alt="UNIMAX" class="floating-logo">
             </div>
 
-            <!-- Projects Grid -->
-            <div class="projects-grid">
-                
-                <!-- Project Card 1 -->
-                <article class="project-card" data-category="MOTION">
-                    <div class="card-glow"></div>
-                    <div class="card-inner">
-                        <div class="video-container">
-                            <video src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-134-large.mp4" muted loop playsinline></video>
-                            <div class="video-overlay"></div>
-                            <div class="play-icon">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
+            <!-- Category Sections -->
+            <div class="categories-container" id="categoriesContainer">
+                <!-- Reels -->
+                <section class="category-section" id="REELS" data-category="REELS">
+                    <div class="category-header">
+                        <div class="category-info">
+                            <span class="category-icon">🎬</span>
+                            <h2 class="category-title">Reels</h2>
                         </div>
-                        <div class="card-content">
-                            <span class="card-category">MOTION DESIGN</span>
-                            <h3 class="card-title">Ink Dreams</h3>
-                            <p class="card-desc">Fluid motion graphics with organic transitions</p>
-                            <div class="card-meta">
-                                <span class="meta-item">4K</span>
-                                <span class="meta-item">60fps</span>
-                                <span class="meta-item">2024</span>
-                            </div>
-                        </div>
-                        <div class="card-number">01</div>
+                        <span class="category-count">0 projects</span>
                     </div>
-                </article>
+                    <div class="projects-grid category-grid" data-category="REELS"></div>
+                    <button class="see-more-btn" data-category="REELS" style="display: none;">
+                        <span>See More</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </section>
 
-                <!-- Project Card 2 -->
-                <article class="project-card" data-category="VFX">
-                    <div class="card-glow"></div>
-                    <div class="card-inner">
-                        <div class="video-container">
-                            <video src="https://assets.mixkit.co/videos/preview/mixkit-purple-and-golden-lights-1234-large.mp4" muted loop playsinline></video>
-                            <div class="video-overlay"></div>
-                            <div class="play-icon">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
+                <!-- Documentary -->
+                <section class="category-section" id="DOCUMENTARY" data-category="DOCUMENTARY">
+                    <div class="category-header">
+                        <div class="category-info">
+                            <span class="category-icon">🎥</span>
+                            <h2 class="category-title">Documentary</h2>
                         </div>
-                        <div class="card-content">
-                            <span class="card-category">VISUAL EFFECTS</span>
-                            <h3 class="card-title">Neon Pulse</h3>
-                            <p class="card-desc">High-energy particle systems and light trails</p>
-                            <div class="card-meta">
-                                <span class="meta-item">4K</span>
-                                <span class="meta-item">120fps</span>
-                                <span class="meta-item">2024</span>
-                            </div>
-                        </div>
-                        <div class="card-number">02</div>
+                        <span class="category-count">0 projects</span>
                     </div>
-                </article>
+                    <div class="projects-grid category-grid" data-category="DOCUMENTARY"></div>
+                    <button class="see-more-btn" data-category="DOCUMENTARY" style="display: none;">
+                        <span>See More</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </section>
 
-                <!-- Project Card 3 -->
-                <article class="project-card" data-category="EDIT">
-                    <div class="card-glow"></div>
-                    <div class="card-inner">
-                        <div class="video-container">
-                            <video src="https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4" muted loop playsinline></video>
-                            <div class="video-overlay"></div>
-                            <div class="play-icon">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
+                <!-- Graphics Design -->
+                <section class="category-section" id="GRAPHICS" data-category="GRAPHICS">
+                    <div class="category-header">
+                        <div class="category-info">
+                            <span class="category-icon">🎨</span>
+                            <h2 class="category-title">Graphics Design</h2>
                         </div>
-                        <div class="card-content">
-                            <span class="card-category">CINEMATIC EDIT</span>
-                            <h3 class="card-title">Golden Hour</h3>
-                            <p class="card-desc">Atmospheric color grading and seamless cuts</p>
-                            <div class="card-meta">
-                                <span class="meta-item">4K</span>
-                                <span class="meta-item">24fps</span>
-                                <span class="meta-item">2024</span>
-                            </div>
-                        </div>
-                        <div class="card-number">03</div>
+                        <span class="category-count">0 projects</span>
                     </div>
-                </article>
+                    <div class="projects-grid category-grid" data-category="GRAPHICS"></div>
+                    <button class="see-more-btn" data-category="GRAPHICS" style="display: none;">
+                        <span>See More</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </section>
 
-                <!-- Project Card 4 -->
-                <article class="project-card" data-category="3D">
-                    <div class="card-glow"></div>
-                    <div class="card-inner">
-                        <div class="video-container">
-                            <video src="https://assets.mixkit.co/videos/preview/mixkit-abstract-flowing-colorful-fluid-4007-large.mp4" muted loop playsinline></video>
-                            <div class="video-overlay"></div>
-                            <div class="play-icon">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
+                <!-- Posters -->
+                <section class="category-section" id="POSTERS" data-category="POSTERS">
+                    <div class="category-header">
+                        <div class="category-info">
+                            <span class="category-icon">🖼️</span>
+                            <h2 class="category-title">Posters</h2>
                         </div>
-                        <div class="card-content">
-                            <span class="card-category">3D ANIMATION</span>
-                            <h3 class="card-title">Fluid Reality</h3>
-                            <p class="card-desc">Abstract 3D fluid simulations and morphing</p>
-                            <div class="card-meta">
-                                <span class="meta-item">4K</span>
-                                <span class="meta-item">60fps</span>
-                                <span class="meta-item">2024</span>
-                            </div>
-                        </div>
-                        <div class="card-number">04</div>
+                        <span class="category-count">0 projects</span>
                     </div>
-                </article>
-
-                <!-- Project Card 5 -->
-                <article class="project-card" data-category="MUSIC">
-                    <div class="card-glow"></div>
-                    <div class="card-inner">
-                        <div class="video-container">
-                            <video src="https://assets.mixkit.co/videos/preview/mixkit-night-sky-with-stars-at-a-calm-lake-21464-large.mp4" muted loop playsinline></video>
-                            <div class="video-overlay"></div>
-                            <div class="play-icon">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <span class="card-category">MUSIC VIDEO</span>
-                            <h3 class="card-title">Midnight Lake</h3>
-                            <p class="card-desc">Dreamy visuals synced to ambient soundscapes</p>
-                            <div class="card-meta">
-                                <span class="meta-item">4K</span>
-                                <span class="meta-item">30fps</span>
-                                <span class="meta-item">2024</span>
-                            </div>
-                        </div>
-                        <div class="card-number">05</div>
-                    </div>
-                </article>
-
-                <!-- Project Card 6 -->
-                <article class="project-card" data-category="PROMO">
-                    <div class="card-glow"></div>
-                    <div class="card-inner">
-                        <div class="video-container">
-                            <video src="https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4" muted loop playsinline></video>
-                            <div class="video-overlay"></div>
-                            <div class="play-icon">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11.25-7.36a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <span class="card-category">BRAND PROMO</span>
-                            <h3 class="card-title">Ocean Flow</h3>
-                            <p class="card-desc">Elegant product showcase with water elements</p>
-                            <div class="card-meta">
-                                <span class="meta-item">4K</span>
-                                <span class="meta-item">60fps</span>
-                                <span class="meta-item">2024</span>
-                            </div>
-                        </div>
-                        <div class="card-number">06</div>
-                    </div>
-                </article>
-
+                    <div class="projects-grid category-grid" data-category="POSTERS"></div>
+                    <button class="see-more-btn" data-category="POSTERS" style="display: none;">
+                        <span>See More</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </section>
             </div>
 
             <!-- Marquee Text -->
             <div class="marquee-container">
                 <div class="marquee-track">
-                    <span class="marquee-text">MOTION DESIGN</span>
+                    <span class="marquee-text">REELS</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">DOCUMENTARY</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">GRAPHICS</span>
+                    <span class="marquee-separator">✦</span>
+                    <span class="marquee-text">POSTERS</span>
                     <span class="marquee-separator">✦</span>
                     <span class="marquee-text">VIDEO EDITING</span>
                     <span class="marquee-separator">✦</span>
-                    <span class="marquee-text">VISUAL EFFECTS</span>
+                    <span class="marquee-text">REELS</span>
                     <span class="marquee-separator">✦</span>
-                    <span class="marquee-text">COLOR GRADING</span>
+                    <span class="marquee-text">DOCUMENTARY</span>
                     <span class="marquee-separator">✦</span>
-                    <span class="marquee-text">3D ANIMATION</span>
+                    <span class="marquee-text">GRAPHICS</span>
                     <span class="marquee-separator">✦</span>
-                    <span class="marquee-text">MOTION DESIGN</span>
+                    <span class="marquee-text">POSTERS</span>
                     <span class="marquee-separator">✦</span>
                     <span class="marquee-text">VIDEO EDITING</span>
-                    <span class="marquee-separator">✦</span>
-                    <span class="marquee-text">VISUAL EFFECTS</span>
-                    <span class="marquee-separator">✦</span>
-                    <span class="marquee-text">COLOR GRADING</span>
-                    <span class="marquee-separator">✦</span>
-                    <span class="marquee-text">3D ANIMATION</span>
                     <span class="marquee-separator">✦</span>
                 </div>
             </div>
@@ -370,6 +327,56 @@
 
     </main>
 
+    <!-- Category Modal (See More) -->
+    <div class="category-modal" id="categoryModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <span class="modal-icon" id="modalIcon">🎬</span>
+                    <h2 class="modal-title" id="modalTitle">Category</h2>
+                    <span class="modal-count" id="modalCount">0 projects</span>
+                </div>
+                <button class="modal-close" id="closeModal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid" id="modalGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-backdrop"></div>
+        <div class="video-modal-container">
+            <button class="video-modal-close" id="closeVideoModal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="video-modal-content">
+                <video id="modalVideo" controls autoplay>
+                    <source src="" type="video/mp4">
+                </video>
+                <div class="video-modal-info">
+                    <h3 id="videoModalTitle">Project Title</h3>
+                    <p id="videoModalDesc">Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Link (hidden) -->
+    <a href="admin.html" class="admin-link" title="Admin Panel">⚙</a>
+
+    </div><!-- End site-content -->
+
+    <!-- Scripts - loaded at end for performance -->
+    <script src="effects.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

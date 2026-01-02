@@ -1,0 +1,571 @@
+/* ================================================
+   UNIMAX STUDIOS - Seasonal Effects
+   ================================================ */
+
+/* ================================================
+   SEASONAL CONTAINERS
+   ================================================ */
+.seasonal-effects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9997;
+    overflow: hidden;
+}
+
+.effect-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.effect-layer.active {
+    opacity: 1;
+}
+
+/* ================================================
+   WINTER - SNOWFALL EFFECT
+   ================================================ */
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: #fff;
+    font-size: 1em;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    animation: snowfall linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0.3;
+    }
+}
+
+/* Snow accumulation effect at bottom */
+.snow-ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(to top, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        transparent 100%);
+    transition: height 2s ease;
+}
+
+.effect-layer.active .snow-ground {
+    height: 50px;
+}
+
+/* ================================================
+   SUMMER - SUN GLARE EFFECT
+   ================================================ */
+.sun-glare {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.sun-glare.top-right {
+    top: -100px;
+    right: -100px;
+    background: radial-gradient(circle, 
+        rgba(255, 200, 100, 0.4) 0%, 
+        rgba(255, 150, 50, 0.2) 30%,
+        rgba(255, 100, 0, 0.1) 50%,
+        transparent 70%);
+    animation: sunPulse 4s ease-in-out infinite;
+}
+
+.sun-glare.top-left {
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, 
+        rgba(255, 220, 150, 0.3) 0%, 
+        rgba(255, 180, 100, 0.15) 40%,
+        transparent 70%);
+    animation: sunPulse 5s ease-in-out infinite reverse;
+}
+
+.sun-glare.bottom-left {
+    bottom: -100px;
+    left: -100px;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, 
+        rgba(255, 180, 80, 0.25) 0%, 
+        transparent 60%);
+    animation: sunPulse 6s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+@keyframes sunPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Lens flare streaks */
+.lens-flare {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 400px;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(255, 200, 100, 0.6) 20%,
+        rgba(255, 255, 200, 0.8) 50%,
+        rgba(255, 200, 100, 0.6) 80%,
+        transparent 100%);
+    transform: rotate(-30deg);
+    animation: flareShimmer 3s ease-in-out infinite;
+}
+
+.lens-flare:nth-child(2) {
+    top: 15%;
+    right: 8%;
+    width: 300px;
+    transform: rotate(-25deg);
+    animation-delay: 0.5s;
+}
+
+.lens-flare:nth-child(3) {
+    top: 8%;
+    right: 15%;
+    width: 200px;
+    transform: rotate(-35deg);
+    animation-delay: 1s;
+}
+
+@keyframes flareShimmer {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Heat haze effect */
+.heat-haze {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, 
+        rgba(255, 200, 100, 0.05) 0%, 
+        transparent 100%);
+    animation: heatWave 2s ease-in-out infinite;
+}
+
+@keyframes heatWave {
+    0%, 100% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(1.05);
+    }
+}
+
+/* ================================================
+   RAINY - RAIN EFFECT
+   ================================================ */
+/* Rain clouds */
+.rain-cloud {
+    position: absolute;
+    top: -20px;
+    width: 200px;
+    height: 80px;
+    background: radial-gradient(ellipse at 50% 100%, 
+        rgba(60, 70, 90, 0.6) 0%,
+        rgba(50, 60, 80, 0.4) 40%,
+        transparent 70%);
+    border-radius: 50%;
+    filter: blur(15px);
+    animation: cloudDrift 40s linear infinite;
+}
+
+.rain-cloud:nth-child(1) { left: -10%; animation-delay: 0s; }
+.rain-cloud:nth-child(2) { left: 20%; animation-delay: -10s; width: 250px; }
+.rain-cloud:nth-child(3) { left: 50%; animation-delay: -20s; width: 180px; }
+.rain-cloud:nth-child(4) { left: 75%; animation-delay: -30s; width: 220px; }
+
+@keyframes cloudDrift {
+    0% { transform: translateX(-50px); opacity: 0.4; }
+    50% { opacity: 0.7; }
+    100% { transform: translateX(50px); opacity: 0.4; }
+}
+
+.raindrop {
+    position: absolute;
+    top: -20px;
+    width: 1.5px;
+    height: 25px;
+    background: linear-gradient(to bottom, 
+        transparent 0%,
+        rgba(150, 180, 220, 0.4) 50%,
+        rgba(100, 150, 200, 0.6) 100%);
+    animation: rainfall 2s linear infinite;
+    border-radius: 0 0 2px 2px;
+}
+
+@keyframes rainfall {
+    0% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0.3;
+    }
+}
+
+/* Rain splash effect */
+.rain-splash {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, 
+        rgba(100, 130, 180, 0.1) 0%, 
+        transparent 100%);
+}
+
+/* Fog/mist overlay */
+.rain-mist {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        rgba(60, 80, 100, 0.15) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(60, 80, 100, 0.1) 100%);
+    animation: mistFloat 15s ease-in-out infinite;
+}
+
+@keyframes mistFloat {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Lightning flash - slower */
+.lightning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0);
+    animation: lightning 20s infinite;
+}
+
+@keyframes lightning {
+    0%, 94%, 96%, 98%, 100% {
+        background: rgba(255, 255, 255, 0);
+    }
+    95%, 97% {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+/* ================================================
+   SPRING - CHERRY BLOSSOM EFFECT
+   ================================================ */
+.petal {
+    position: absolute;
+    top: -30px;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(ellipse at center, 
+        rgba(255, 200, 210, 0.9) 0%, 
+        rgba(255, 150, 170, 0.7) 50%,
+        rgba(255, 120, 150, 0.5) 100%);
+    border-radius: 50% 0 50% 0;
+    animation: petalFall linear infinite;
+    transform-origin: center center;
+}
+
+.petal::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+}
+
+@keyframes petalFall {
+    0% {
+        transform: translateY(-30px) rotate(0deg) translateX(0);
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(25vh) rotate(90deg) translateX(30px);
+    }
+    50% {
+        transform: translateY(50vh) rotate(180deg) translateX(-20px);
+    }
+    75% {
+        transform: translateY(75vh) rotate(270deg) translateX(40px);
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg) translateX(0);
+        opacity: 0.3;
+    }
+}
+
+/* Petal variations */
+.petal.variant-2 {
+    background: radial-gradient(ellipse at center, 
+        rgba(255, 220, 230, 0.9) 0%, 
+        rgba(255, 180, 200, 0.7) 50%,
+        rgba(255, 150, 180, 0.5) 100%);
+    border-radius: 0 50% 0 50%;
+}
+
+.petal.variant-3 {
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(ellipse at center, 
+        rgba(255, 240, 245, 0.9) 0%, 
+        rgba(255, 200, 220, 0.7) 100%);
+}
+
+/* Spring ambient glow */
+.spring-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(255, 200, 220, 0.05) 0%,
+        transparent 50%,
+        rgba(200, 255, 200, 0.05) 100%);
+    animation: springAmbient 6s ease-in-out infinite;
+}
+
+@keyframes springAmbient {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* ================================================
+   SEASONAL COLOR THEMES
+   ================================================ */
+
+/* Winter Theme */
+[data-season="winter"] {
+    --bg-primary: #0a0d12;
+    --bg-secondary: #0f1318;
+    --bg-card: #141a22;
+    --accent-primary: #60a5fa;
+    --accent-secondary: #38bdf8;
+    --accent-gradient: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #22d3ee 100%);
+    --glow-primary: rgba(96, 165, 250, 0.4);
+    --glow-secondary: rgba(56, 189, 248, 0.3);
+    --text-secondary: #94a3b8;
+}
+
+/* Summer Theme */
+[data-season="summer"] {
+    --bg-primary: #0f0a06;
+    --bg-secondary: #1a1208;
+    --bg-card: #221a0c;
+    --accent-primary: #f59e0b;
+    --accent-secondary: #fb923c;
+    --accent-gradient: linear-gradient(135deg, #f59e0b 0%, #fb923c 50%, #fbbf24 100%);
+    --glow-primary: rgba(245, 158, 11, 0.4);
+    --glow-secondary: rgba(251, 146, 60, 0.3);
+    --text-secondary: #a8a29e;
+}
+
+/* Rainy Theme */
+[data-season="rainy"] {
+    --bg-primary: #070a0d;
+    --bg-secondary: #0c1015;
+    --bg-card: #111620;
+    --accent-primary: #6366f1;
+    --accent-secondary: #818cf8;
+    --accent-gradient: linear-gradient(135deg, #6366f1 0%, #818cf8 50%, #a5b4fc 100%);
+    --glow-primary: rgba(99, 102, 241, 0.4);
+    --glow-secondary: rgba(129, 140, 248, 0.3);
+    --text-secondary: #9ca3af;
+}
+
+/* Spring Theme */
+[data-season="spring"] {
+    --bg-primary: #0a0b08;
+    --bg-secondary: #12140e;
+    --bg-card: #1a1d14;
+    --accent-primary: #f472b6;
+    --accent-secondary: #a3e635;
+    --accent-gradient: linear-gradient(135deg, #f472b6 0%, #fb7185 50%, #a3e635 100%);
+    --glow-primary: rgba(244, 114, 182, 0.4);
+    --glow-secondary: rgba(163, 230, 53, 0.3);
+    --text-secondary: #a1a1aa;
+}
+
+/* Default/Neutral Theme */
+[data-season="default"] {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111113;
+    --bg-card: #161618;
+    --accent-primary: #8b5cf6;
+    --accent-secondary: #06b6d4;
+    --accent-gradient: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 50%, #10b981 100%);
+    --glow-primary: rgba(139, 92, 246, 0.4);
+    --glow-secondary: rgba(6, 182, 212, 0.3);
+    --text-secondary: #888888;
+}
+
+/* Theme transition */
+body {
+    transition: 
+        background-color 1s ease,
+        --bg-primary 1s ease,
+        --bg-secondary 1s ease,
+        --accent-primary 1s ease;
+}
+
+/* ================================================
+   EFFECT INTENSITY CONTROLS
+   ================================================ */
+.effect-layer[data-intensity="low"] .snowflake,
+.effect-layer[data-intensity="low"] .raindrop,
+.effect-layer[data-intensity="low"] .petal {
+    opacity: 0.4;
+}
+
+.effect-layer[data-intensity="high"] .snowflake,
+.effect-layer[data-intensity="high"] .raindrop,
+.effect-layer[data-intensity="high"] .petal {
+    opacity: 1;
+}
+
+/* ================================================
+   REDUCED MOTION SUPPORT
+   ================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .snowflake,
+    .raindrop,
+    .petal,
+    .sun-glare,
+    .lens-flare,
+    .lightning {
+        animation: none !important;
+    }
+    
+    .effect-layer {
+        opacity: 0.3;
+    }
+}
+
+/* ================================================
+   MOBILE EFFECT OPTIMIZATIONS
+   ================================================ */
+@media (max-width: 768px) {
+    /* Reduce particle count effect (handled in JS) */
+    .effect-layer {
+        opacity: 0.7;
+    }
+    
+    /* Smaller particles on mobile */
+    .snowflake {
+        width: 4px;
+        height: 4px;
+    }
+    
+    .petal {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .raindrop {
+        height: 15px;
+    }
+    
+    /* Reduce sun glare intensity */
+    .sun-glare {
+        width: 300px;
+        height: 300px;
+        opacity: 0.6;
+    }
+    
+    .lens-flare {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .lens-flare:nth-child(2) {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .lens-flare:nth-child(3) {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .effect-layer {
+        opacity: 0.5;
+    }
+    
+    .sun-glare {
+        width: 200px;
+        height: 200px;
+        opacity: 0.4;
+    }
+    
+    /* Simpler animations for performance */
+    .snowflake {
+        animation-timing-function: linear;
+    }
+    
+    .petal {
+        animation-timing-function: linear;
+    }
+}
